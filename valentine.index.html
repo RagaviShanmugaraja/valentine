@@ -1,0 +1,165 @@
+<!-- Write your code below -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Surprise 💖</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .page {
+      display: none;
+      padding: 20px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 32px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 14px 26px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .yes {
+      background-color: #ff4b5c;
+      color: white;
+    }
+
+    .no {
+      background-color: #ffffff;
+      color: #ff4b5c;
+    }
+
+    img {
+      width: 85%;
+      max-width: 300px;
+      border-radius: 20px;
+      margin-top: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 12px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="page active" id="page1">
+    <h1>Hi Purusha ❤️</h1>
+    <button class="yes" onclick="goToPage2()">Next 💌</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page" id="page2">
+    <h1>Will you be my Valentine? 💘</h1>
+    <button class="yes" id="yesBtn" onclick="goToPage3()">YES 💖</button>
+    <button class="no" id="noBtn" onclick="noClicked()">NO 😏</button>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page" id="page3">
+    <h1>Happy Valentine’s Day, my love ❤️</h1>
+    <img src="f:\Photos\RR\IMG-20250815-WA0010.jpg" alt="Our Photo">
+  </div>
+
+  <script>
+    function goToPage2() {
+      switchPage("page1", "page2");
+    }
+
+    function goToPage3() {
+      switchPage("page2", "page3");
+    }
+
+    function switchPage(from, to) {
+      document.getElementById(from).classList.remove("active");
+      document.getElementById(to).classList.add("active");
+    }
+
+    function noClicked() {
+      const yesBtn = document.getElementById("yesBtn");
+      const noBtn = document.getElementById("noBtn");
+
+      yesBtn.style.fontSize = "26px";
+      yesBtn.style.padding = "20px 45px";
+
+      noBtn.innerText = "Think again 😜";
+    }
+
+    /* Create floating hearts */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+
+</body>
+</html>
